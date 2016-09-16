@@ -1,5 +1,7 @@
 # Battle-Tank-Game
 
+![A Medium Tank from Advance Wars](http://www.blendernation.com/wp-content/uploads/2015/05/finalTank1.jpg)
+
 ##Description
 Tank battle game using miniatures on a war table featuring terrain for cover and pickups.
 
