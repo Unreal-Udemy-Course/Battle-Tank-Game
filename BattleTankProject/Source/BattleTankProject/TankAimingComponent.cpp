@@ -33,7 +33,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::TraceFullPath
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace // Parameter must be present to prevent bug
 	);
 	if (bHaveAimSolution)
 	{
@@ -55,11 +58,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	// calculate the difference in rotation between the barrel and the aim direction
+	
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	
 	// if there is a difference between the two
 	
-	Barrel->Elevate(5);
+	Barrel->Elevate(DeltaRotator.Pitch); //TODO Remove magic number
 }
