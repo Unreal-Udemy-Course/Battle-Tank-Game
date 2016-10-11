@@ -2,6 +2,7 @@
 
 #include "BattleTankProject.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "TankAimingComponent.h"
 
 
@@ -19,6 +20,11 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
+{
+	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
@@ -59,11 +65,12 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	// calculate the difference in rotation between the barrel and the aim direction
 	
-	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
-	auto AimAsRotator = AimDirection.Rotation();
-	auto DeltaRotator = AimAsRotator - BarrelRotator;
-	
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation(); // get cuurent rotation of turret
+	auto AimAsRotator = AimDirection.Rotation(); // get the AimDirection as a Rotation
+	auto DeltaRotator = AimAsRotator - BarrelRotator; 
+		
 	// if there is a difference between the two
 	
-	Barrel->Elevate(DeltaRotator.Pitch); //TODO Remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch); 
+	Turret->Rotate(DeltaRotator.Yaw);
 }
