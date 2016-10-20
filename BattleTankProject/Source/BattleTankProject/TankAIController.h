@@ -12,8 +12,11 @@ class BATTLETANKPROJECT_API ATankAIController : public AAIController
 	
 public:
 	virtual void BeginPlay() override;
+	
 
 private:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+	UPROPERTY(EditDefaultsOnly) // How close can AI Tank get to the player
+	float AcceptanceRadiance = 3000;
 };
