@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Micro Knight Games
 
 #include "BattleTankProject.h"
 #include "TankBarrel.h"
@@ -25,7 +25,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel) { return; } //protects the from a null barrel pointer
+	if (!ensure(Barrel)) { return; } //protects the from a null barrel pointer
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile")); // We have to construct an FName for the socket as that is the argument type
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
@@ -60,7 +60,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 	// pointer protection
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel && Turret)) { return; }
 	
 	// calculate the difference in rotation between the barrel and the aim direction
 	

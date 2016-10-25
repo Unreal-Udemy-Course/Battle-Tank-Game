@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Micro Knight Games
 
 #include "BattleTankProject.h"
 #include "TankAimingComponent.h"
@@ -38,15 +38,15 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
 	bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	
-	if (Barrel && IsReloaded)
+	if (ensure(Barrel)) {return;}
+	if (IsReloaded)
 	{
 		FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
 		FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
