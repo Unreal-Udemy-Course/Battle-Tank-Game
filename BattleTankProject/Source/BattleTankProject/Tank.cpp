@@ -1,7 +1,6 @@
 // Copyright Micro Knight Games
 
 #include "BattleTankProject.h"
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "Tank.h"
@@ -21,7 +20,6 @@ void ATank::BeginPlay()
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
 
 
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 // Called to bind functionality to input
@@ -31,11 +29,6 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
 
 void ATank::Fire()
 {
