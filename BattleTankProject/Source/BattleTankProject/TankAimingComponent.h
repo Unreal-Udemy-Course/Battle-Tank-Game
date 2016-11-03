@@ -44,6 +44,7 @@ private:
 	void MoveBarrelTowards(FVector AimDirection);
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	bool IsBarrelMoving();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 4000;
@@ -54,6 +55,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	double LastFireTime = 0;
+	FVector AimDirection;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
