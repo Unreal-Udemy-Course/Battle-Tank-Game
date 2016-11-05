@@ -46,6 +46,11 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	Turret = TurretToSet;
 }
 
+EFiringStatus UTankAimingComponent::GetFiringStatus() const
+{
+	return FiringStatus;
+}
+
 void UTankAimingComponent::AimAt(FVector HitLocation)
 {
 	if (!ensure(Barrel)) { return; } //protects the from a null barrel pointer
@@ -91,10 +96,18 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation(); // get the AimDirection as a Rotation
 	auto DeltaRotator = AimAsRotator - BarrelRotator; 
 		
-	// if there is a difference between the two
-	
+	// add rotation adjustment	
 	Barrel->Elevate(DeltaRotator.Pitch); 
-	Turret->Rotate(DeltaRotator.Yaw);
+
+	// take shortest route
+	if (DeltaRotator.Yaw < 180)
+	{
+		Turret->Rotate(DeltaRotator.Yaw);
+	}
+	else
+	{
+		Turret->Rotate(- DeltaRotator.Yaw);
+	}
 }
 
 void UTankAimingComponent::Fire()

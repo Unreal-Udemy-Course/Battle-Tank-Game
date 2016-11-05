@@ -18,6 +18,8 @@ public:
 private:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
+
+protected:
 	UPROPERTY(EditDefaultsOnly) // How close can AI Tank get to the player
-	float AcceptanceRadiance = 3000;
+	float AcceptanceRadiance = 8000;
 };
