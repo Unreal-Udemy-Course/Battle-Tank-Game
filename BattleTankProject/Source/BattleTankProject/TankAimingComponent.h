@@ -11,7 +11,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	NoAmmo
 };
 
 // Forward declaration
@@ -39,6 +40,9 @@ public:
 
 	EFiringStatus GetFiringStatus() const;
 
+	UFUNCTION(BlueprintCallable, Category = "UI")
+	int GetAmmoCount() const;
+
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
@@ -62,5 +66,8 @@ private:
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int Ammo = 10;
 	
 };
