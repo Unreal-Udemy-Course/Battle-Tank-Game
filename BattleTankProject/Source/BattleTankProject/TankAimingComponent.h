@@ -41,7 +41,7 @@ public:
 	EFiringStatus GetFiringStatus() const;
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
-	int GetAmmoCount() const;
+	int32 GetAmmoCount() const;
 
 private:
 	UTankBarrel* Barrel = nullptr;
@@ -68,6 +68,6 @@ protected:
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	int Ammo = 10;
+	int32 Ammo = 10;
 	
 };
