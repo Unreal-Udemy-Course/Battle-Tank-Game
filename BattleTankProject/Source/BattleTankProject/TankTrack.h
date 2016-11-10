@@ -16,6 +16,7 @@ class BATTLETANKPROJECT_API UTankTrack : public UStaticMeshComponent
 private:
 	virtual void BeginPlay() override;
 	void ApplySidewaysForce();
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
