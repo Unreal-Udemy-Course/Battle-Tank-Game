@@ -25,3 +25,21 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 	Super::SetupPlayerInputComponent(InputComponent);
 
 }
+
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	int32 Damagepoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(Damagepoints, 0, CurrentHealth);
+	
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Tank Died"));
+	}
+
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f Damage amount: %f"), Time, DamageAmount);
+	UE_LOG(LogTemp, Warning, TEXT("%f Damage to apply: %i"), Time, DamageToApply);
+	
+	return DamageToApply;
+}

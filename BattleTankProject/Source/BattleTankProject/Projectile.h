@@ -39,6 +39,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float DestroyDelay = 10.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ProjectileDamage = 10.f;
+
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 	
