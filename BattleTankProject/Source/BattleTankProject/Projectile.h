@@ -17,9 +17,11 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	void LaunchProjectile(float Speed);
+	void LaunchProjectile(float Speed);	
 
 private:
+	void OnTimerExpire();
+
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -33,6 +35,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* ExplosionForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float DestroyDelay = 10.f;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
