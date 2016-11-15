@@ -21,7 +21,7 @@ private:
 	virtual void SetPawn(APawn* Inpawn) override;
 
 	UFUNCTION()
-		void OnPossessedTankDeath();
+	void OnPossessedTankDeath();
 
 protected:
 	UPROPERTY(EditDefaultsOnly) // How close can AI Tank get to the player
